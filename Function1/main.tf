@@ -10,7 +10,7 @@ resource "aws_lambda_function" "function" {
     "Name" = "${var.function_name}"
   }
 }
-
+#
 resource "aws_iam_role" "lambda_exec" {
   name = "${var.function_name}-Role"
 
