@@ -1,5 +1,5 @@
 import boto3, pytest, os, json
-from ..Lambda_code import main
+from .. import main
 from moto import mock_s3
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))

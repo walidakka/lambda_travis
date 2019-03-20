@@ -2,7 +2,7 @@ import boto3
 import pytest
 import os, time
 import json
-from ..Lambda_code import main
+from .. import main
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 with open(os.path.join(THIS_FOLDER, 'output.json')) as f:
