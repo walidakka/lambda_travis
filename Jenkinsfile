@@ -19,7 +19,7 @@ node {
               sh "terraform apply --auto-approve"
         }
         stage ("End-to-End-Test"){
-              sh "terraform output -json > output.json"
+              sh "terraform output -json > Lambda_code/tests/output.json"
               sh "pytest Lambda_code/tests/test_lambda_E2E.py"
         }
         stage ("clean"){
