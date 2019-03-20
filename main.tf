@@ -1,7 +1,11 @@
+provider "aws" {
+  region  = "${var.aws_region}"
+  profile = "${var.aws_profile}"
+}
+
 resource "aws_lambda_function" "function" {
   function_name    = "${var.function_name}"
   filename         = "./Lambda_code/package.zip"
-  source_code_hash = "${base64sha256(file("./Lambda_code/package.zip"))}"
   handler          = "main.handler"
   runtime          = "${var.lambda_runtime}"
   role             = "${aws_iam_role.lambda_exec.arn}"
@@ -70,4 +74,7 @@ resource "aws_s3_bucket_notification" "bucket_notification" {
   }
 }
 
-resource "aws_s3_bucket" "bucket" {}
+resource "aws_s3_bucket" "bucket" {
+  bucket_prefix = "test-lambda-temp"
+  force_destroy = true
+}
