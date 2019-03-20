@@ -12,7 +12,7 @@ node {
         stage ("Deploy-Test"){
           dir("Lambda_code")
           {
-            sh "zip main.py package.zip"
+            sh "zip package.zip main.py "
           }
               sh "terraform init"
               sh "terraform plan"
