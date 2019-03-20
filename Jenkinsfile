@@ -27,6 +27,9 @@ node {
         }
 
     } catch (err) {
+      timeout(time: 2, unit: “HOURS”) {
+    input message: ‘Approve Destroy?’, ok: ‘Yes’
+}
       sh "terraform destroy --auto-approve"
         currentBuild.result = 'FAILED'
         throw err
