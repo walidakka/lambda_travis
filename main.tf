@@ -76,6 +76,6 @@ resource "aws_s3_bucket_notification" "bucket_notification" {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket_prefix = "test-${var.function_name}"
+  bucket_prefix = "test-lambda-temp"
   force_destroy = true
 }
