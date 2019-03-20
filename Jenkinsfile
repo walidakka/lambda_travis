@@ -17,7 +17,7 @@ node {
 	            sh "echo 'shell scripts to run integration tests...'"
 	        }
         }
-      	}
+
     } catch (err) {
         currentBuild.result = 'FAILED'
         throw err
