@@ -11,7 +11,7 @@ with open(os.path.join(THIS_FOLDER, 'output.json')) as f:
 def test_lambda_E2E():
     s3 = boto3.resource('s3')
     bucket = s3.Bucket(output['bucket_name']['value'])
-    bucket.put_object(Key="something.ezazekssea.zeaaze.sss")
+    bucket.put_object(Key="something.ezazekssea.zeaaze.sss",Body=b'foobar')
     time.sleep(3)
     assert len(list(bucket.objects.filter(Prefix="something.ezazekssea.zeaaze.jpg"))) == 1
     assert len(list(bucket.objects.filter(Prefix="something.ezazekssea.zeaaze.sss"))) == 0
