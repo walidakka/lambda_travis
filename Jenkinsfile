@@ -10,7 +10,10 @@ node {
 	            sh "pytest"
         }
         stage ("Deploy-Test"){
-              sh "zip Lambda_code/main.py Lambda_code/package.zip"
+          dir("Lambda_code")
+          {
+            sh "zip main.py package.zip"
+          }
               sh "terraform init"
               sh "terraform plan"
               sh "terraform apply --auto-approve"
