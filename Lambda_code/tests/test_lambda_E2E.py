@@ -16,4 +16,4 @@ def test_lambda_E2E():
     for filename in os.listdir(THIS_FOLDER+'/test_files'):
         bucket.upload_file(os.path.join(THIS_FOLDER+'/test_files',filename),filename)
         time.sleep(1)
-        assert len(list(bucket.objects.filter(Prefix=filename[:-3]+'jpg'))) == 1
+        assert len(list(bucket.objects.filter(Prefix=filename[:-len(filename.split('.')[-1])] + 'jpg'))) == 1
