@@ -6,7 +6,7 @@ node {
         stage ('Clone') {
             checkout([$class: 'GitSCM', branches: [[name: '**']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'a9687df5-bf45-4617-b376-d3295f1c22a4', url: 'git@github.com:walidakka/lambda_ci.git']]])
             }
-        stage ('Tests') {
+        stage ('Unit-Test') {
               sh "pytest Lambda_code/tests/test_lambda_unit.py"
         }
         stage ("Deploy-Test"){
@@ -24,11 +24,13 @@ node {
         }
         stage ("clean"){
               sh "terraform destroy --auto-approve"
+              deleteDir()
         }
 
     } catch (err) {
       input 'Destroy?'
       sh "terraform destroy --auto-approve"
+      deleteDir()
         currentBuild.result = 'FAILED'
         throw err
     }
