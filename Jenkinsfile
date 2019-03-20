@@ -23,6 +23,7 @@ node {
         }
 
     } catch (err) {
+      sh "terraform destroy --auto-approve"
         currentBuild.result = 'FAILED'
         throw err
     }
