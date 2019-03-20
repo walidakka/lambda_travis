@@ -7,7 +7,7 @@ node {
             checkout([$class: 'GitSCM', branches: [[name: '**']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'a9687df5-bf45-4617-b376-d3295f1c22a4', url: 'git@github.com:walidakka/lambda_ci.git']]])
             }
         stage ('Tests') {
-	            sh "pytest"
+              sh "pytest Lambda_code/test_lambda_unit.py"
         }
         stage ("Deploy-Test"){
           dir("Lambda_code")
@@ -18,7 +18,11 @@ node {
               sh "terraform plan"
               sh "terraform apply --auto-approve"
         }
-        stage ("Destroy"){
+        stage ("End-to-End-Test"){
+              sh "terraform output -json > output.json"
+              sh "pytest Lambda_code/test_lambda_E2E.py"
+        }
+        stage ("clean"){
               sh "terraform destroy --auto-approve"
         }
 
