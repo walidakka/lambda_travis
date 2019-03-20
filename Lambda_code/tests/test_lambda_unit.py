@@ -7,7 +7,7 @@ with open(os.path.join(THIS_FOLDER, 'event.json')) as f:
     event = json.load(f)
 @mock_s3
 def test_handler_rename():
-    conn = boto3.resource('s3', region_name='eu-west-1')
+    conn = boto3.resource('s3')
     bucket = conn.create_bucket(Bucket=event['Records'][0]['s3']['bucket']['name'])
     bucket.put_object(Key=event['Records'][0]['s3']['object']['key'])
     result = main.handler(event,None)
