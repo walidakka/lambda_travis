@@ -4,10 +4,8 @@ from moto import mock_s3
 import pytest
 
 
-event = {}
-
-with open()
-
+with open('tests/event.json') as f:
+    event = json.load(f)
 @mock_s3
 def test_handler():
     conn = boto3.resource('s3', region_name='eu-west-1')
