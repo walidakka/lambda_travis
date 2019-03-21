@@ -1,11 +1,25 @@
 dist: trusty
 sudo: false
-#Install a Terraform executable
+
+branches:
+  only:
+    - master
+
+env:
+  - TF_INPUT=false
+
+# Install terraform
 before_install:
-  - curl -sLo /tmp/terraform.zip https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_windows_amd64.zip
+  - curl -sLo /tmp/terraform.zip https://releases.hashicorp.com/terraform/0.8.8/terraform_0.8.8_linux_amd64.zip
   - unzip /tmp/terraform.zip -d /tmp
   - mv /tmp/terraform ~/bin
   - export PATH="~/bin:$PATH"
 
-#These two steps will effectively validate our terraform and output a list of any changes to be made to our infrastructure
-script: terraform init ./terraform
+script: terraform plan ./terraform
+
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: terraform plan ./terraform
+  on:
+    branch: master
