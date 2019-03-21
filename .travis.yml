@@ -15,11 +15,11 @@ before_install:
   - mv /tmp/terraform ~/bin
   - export PATH="~/bin:$PATH"
 
-script: terraform plan ./terraform
+script: terraform init
 
 deploy:
 - provider: script
   skip_cleanup: true
-  script: terraform plan ./terraform
+  script: terraform plan
   on:
     branch: master
